@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="questions">
+    <title>Questions</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(187, 236, 194);
+        }
+
+        section {
+            margin: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .heading {
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .questionsContainer {
+            width: 50vw;
+        }
+
+        @media screen and (max-width:500px) {
+            .questionsContainer {
+                width: 80vw;
+            }
+        }
+
+        .question {
+            margin: 10px;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        .qTitle {
+            margin: 10px 10px 0px 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            background-color: aliceblue;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background-color: transparent;
+            border: none;
+            font-size: 20px;
+            transition: all 0.3s linear;
+        }
+
+        .btn:hover {
+            transform: rotate(360deg);
+        }
+
+        .minus {
+            display: none;
+        }
+
+        .qAnswer {
+            display: none;
+        }
+
+        .show .qTitle {
+            margin: 10px 10px 0px 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            background-color: aliceblue;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .show .plus {
+            display: none;
+        }
+
+        .show .minus {
+            display: inline;
+        }
+
+        .show .qAnswer {
+            display: block;
+            margin: 0px 10px 10px 10px;
+            padding: 10px;
+            background-color: aliceblue;
+            border-top: 1px solid black;
+            border-radius: 0 0 5px 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <section>
+        <div class="heading">
+            <h1>Frequently asked questions</h1>
+        </div>
+        <div class="questionsContainer">
+            <article class="question">
+                <div class="qTitle">
+                    <p>What is GDP?</p>
+                    <button type="button" class="btn" id="btn-1">
+                        <span class="plus">+</span>
+                        <span class="minus">-</span>
+                    </button>
+                </div>
+                <div class="qAnswer">
+                    <p>Total value of goods and services produced in a country in a particular period</p>
+                </div>
+            </article>
+            <article class="question">
+                <div class="qTitle">
+                    <p>What is fiscal deficit?</p>
+                    <button type="button" class="btn" id="btn-2">
+                        <span class="plus">+</span>
+                        <span class="minus">-</span>
+                    </button>
+                </div>
+                <div class="qAnswer">
+                    <p>When the expenditure of the government exceeds its revenue, such a situation is called as fiscak
+                        deficit.</p>
+                </div>
+            </article>
+            <article class="question">
+                <div class="qTitle">
+                    <p>What is deficit financing?</p>
+                    <button type="button" class="btn" id="btn-3">
+                        <span class="plus">+</span>
+                        <span class="minus">-</span>
+                    </button>
+                </div>
+                <div class="qAnswer">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam, dolores.</p>
+                </div>
+            </article>
+            <article class="question">
+                <div class="qTitle">
+                    <p>What is meant by Current account deficit?</p>
+                    <button class="btn" id="btn-4">
+                        <span class="plus">+</span>
+                        <span class="minus">-</span>
+                    </button>
+                </div>
+                <div class="qAnswer">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea deserunt enim atque aspernatur
+                        nesciunt ratione autem ut repellat quisquam accusantium.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+    <script>
+        let btns = document.querySelectorAll(".btn")
+        let questions = document.querySelectorAll(".question")
+
+        btns.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                // the purpose of the index variable is to find the id value of the button which is clicked
+                let index = e.currentTarget.id.split("-")[1]
+
+                // to remove the "show" class for other questions
+                questions.forEach((question, indy) => {
+                    if (indy !== (index - 1)) {
+                        question.classList.remove("show")
+                    }
+                })
+
+                // here, we have reduce the index by 1 to match the clicked button with appropriate question and applying the "show" class to it
+                questions[index - 1].classList.toggle("show")
+            })
+        })
+    </script>
+</body>
+
+</html>

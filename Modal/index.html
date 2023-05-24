@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="modal">
+    <title>Modal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .heroImage {
+            width: 100vw;
+            height: 100vh;
+            background: url("bird.jpg") center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heroText {
+            width: 500px;
+            height: auto;
+            border-radius: 10px;
+            background-color: rgb(0, 249, 211);
+            text-align: center;
+        }
+
+        .heroText h1 {
+            margin: 20px 0px;
+            padding-top: 10px;
+        }
+
+        #enterBtn {
+            color: aliceblue;
+            background-color: rgb(0, 0, 128, 0.3);
+            border-color: rgb(0, 0, 128, 0.5);
+            border-radius: 5px;
+            padding: 6px;
+            width: 70px;
+            margin: 20px;
+        }
+
+        #enterBtn:hover,
+        #doneBtn:hover {
+            background-color: rgb(0, 0, 128, 0.9);
+            color: white;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: transparent;
+        }
+
+        .userDetails {
+            background: white;
+            border-radius: 10px;
+            width: 500px;
+            padding: 50px;
+        }
+
+        .userDetails h1 {
+            text-align: center;
+        }
+
+        .userDetails p {
+            padding: 25px;
+            margin-left: 20px;
+            font-weight: bolder;
+        }
+
+        #doneBtn {
+            color: aliceblue;
+            background-color: rgb(0, 0, 128, 0.9);
+            border-color: rgb(0, 0, 128, 0.5);
+            border-radius: 5px;
+            padding: 6px;
+            width: 80px;
+            margin-left: 150px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1;
+        }
+
+        .openModal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media screen and (max-width:550px) {
+
+            .heroText,
+            .userDetails {
+                width: 80vw;
+            }
+
+            .userDetails p {
+                margin-left: 5px;
+            }
+
+            #doneBtn {
+                margin-left: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heroImage">
+        <div class="heroText">
+            <h1>Enter your Details</h1>
+            <form action="#" id="form">
+                <input type="text" name="name" id="name" placeholder="Enter Your Name"><br />
+                <input type="email" name="email" id="email" placeholder="Enter your Email"><br />
+                <input type="text" name="country" id="country" placeholder="Enter Your country"><br />
+                <button id="enterBtn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="userDetails">
+            <h1>Your Details</h1>
+            <p>Name: <span id="enteredName"></span></p>
+            <p>Email: <span id="enteredEmail"></span></p>
+            <p>Country: <span id="enteredCountry"></span></p>
+            <button id="doneBtn">Done</button>
+        </div>
+    </div>
+
+    <script>
+        let name = document.querySelector("#name");
+        let email = document.querySelector("#email")
+        let country = document.querySelector("#country")
+        let enterBtn = document.querySelector("#enterBtn");
+        let enteredName = document.querySelector("#enteredName");
+        let enteredEmail = document.querySelector("#enteredEmail");
+        let enteredCountry = document.querySelector("#enteredCountry");
+        let modal = document.querySelector(".modal")
+        let doneBtn = document.querySelector("#doneBtn")
+
+        enterBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            enteredName.textContent = name.value;
+            enteredEmail.textContent = email.value;
+            enteredCountry.textContent = country.value;
+            modal.classList.add("openModal")
+        })
+
+        doneBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            modal.classList.remove("openModal")
+        })
+    </script>
+</body>
+
+</html>
