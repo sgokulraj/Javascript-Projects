@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Scroll">
+    <title>Scroll</title>
+    <script src="https://kit.fontawesome.com/a28d96221b.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .navTitle {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 5px 30px;
+        }
+
+        .navTitle img {
+            height: 50px;
+            width: 50px;
+        }
+
+        .navLinkBtn {
+            border: none;
+            background-color: transparent;
+            font-size: 20px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .linkContainer {
+            height: 0;
+            overflow: hidden;
+            transition: all 0.3s linear;
+        }
+
+        .link li {
+            list-style-type: none;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .link li a {
+            text-decoration: none;
+            font-size: 20px;
+            color: black;
+        }
+
+        .link li a:hover {
+            color: goldenrod;
+        }
+
+        @media screen and (min-width: 800px) {
+            .navLinkBtn {
+                display: none;
+            }
+
+            .navBar {
+                width: 90vw;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .link {
+                display: flex;
+            }
+
+            .linkContainer {
+                height: auto !important;
+                /* if "important" is omitted all links will be hidden because I set height of linkContainer to zero in smaller screens*/
+            }
+        }
+
+        .fixedNavBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 1px 1px 20px 1px;
+            background-color: white;
+            width: 100%;
+        }
+
+        .banner {
+            background: linear-gradient(rgba(57, 59, 59, 0.5), rgba(0, 0, 0, 0.7)),
+                url(./images/image.jpg) center/cover no-repeat;
+            display: grid;
+            place-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .titleContainer {
+            width: 80vw;
+        }
+
+        .titleContainer h1 {
+            color: rgb(205, 239, 239);
+            padding: 5px;
+            margin-bottom: 20px;
+            font-size: 40px;
+            text-transform: uppercase;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .titleContainer p {
+            color: rgb(205, 239, 239);
+            padding: 5px;
+            margin-bottom: 50px;
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .exploreBtn {
+            text-decoration: none;
+            border: 1px solid rgb(3, 228, 248);
+            background-color: rgb(3, 228, 248);
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+        }
+
+        .exploreBtn:hover {
+            background-color: rgb(3, 228, 248, 0.6);
+        }
+
+        section {
+            width: 100%;
+            height: 80vh;
+            text-align: center;
+            padding: 10px;
+            border-bottom: 1px solid black;
+        }
+
+        #about,
+        #tours {
+            background-color: antiquewhite;
+        }
+
+        #services {
+            background-color: aliceblue;
+        }
+
+        .title {
+            font-size: 25px;
+        }
+
+        footer {
+            height: 10vh;
+            background-color: darkseagreen;
+            color: white;
+            display: grid;
+            place-items: center;
+            letter-spacing: 3px;
+        }
+
+        .hideHomeLink {
+            display: none;
+        }
+
+        .homeLink {
+            position: fixed;
+            bottom: 150px;
+            right: 50px;
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            text-align: center;
+            color: black;
+            border-radius: 50%;
+            font-size: 40px;
+            animation: zoom 2s ease 0.3s infinite;
+            display: block;
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <main id="home">
+        <nav id="nav">
+            <div class="navBar">
+                <div class="navTitle">
+                    <img src="./logos/logo-1.jpg" alt="logo" class="logo">
+                    <button class="navLinkBtn" title="button" type="button">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <div class="linkContainer">
+                    <ul class="link">
+                        <li>
+                            <a href="#home" class="scroll">Home</a>
+                        </li>
+                        <li>
+                            <a href="#about" class="scroll">About</a>
+                        </li>
+                        <li>
+                            <a href="#services" class="scroll">Services</a>
+                        </li>
+                        <li>
+                            <a href="#tours" class="scroll">Tours</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="banner">
+            <div class="titleContainer">
+                <h1>Adventurer's Tours</h1>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error magnam labore optio numquam corrupti
+                    quae mollitia dolor obcaecati deserunt veritatis!</p>
+                <a href="#tours" class="exploreBtn scroll">Explore</a>
+            </div>
+        </div>
+    </main>
+    <section id="about">
+        <div class="title">
+            <h1>About Us</h1>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="title">
+            <h1>Our Services</h1>
+        </div>
+    </section>
+
+    <section id="tours">
+        <div class="title">
+            <h1>Featured Tours</h1>
+        </div>
+    </section>
+
+    <footer>
+        <p>Copyright &copy; <span id="year"></span>. All rights reserved.</p>
+    </footer>
+
+    <a href="#home" class="hideHomeLink scroll">
+        <i class="fa-sharp fa-solid fa-angle-up"></i>
+    </a>
+    <script>
+        // hide  and show links 
+        let navLinkBtn = document.querySelector(".navLinkBtn")
+        let link = document.querySelector(".link")
+        let linkContainer = document.querySelector(".linkContainer")
+
+        navLinkBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            let linkContainerHeight = linkContainer.getBoundingClientRect().height;
+            let linkHeight = link.getBoundingClientRect().height;
+
+            if (linkContainerHeight === 0) {
+                linkContainer.style.height = `${linkHeight}px`
+            } else {
+                linkContainer.style.height = 0;
+            }
+        })
+
+        //year fixing in footer
+        let year = document.querySelector("#year");
+        year.innerHTML = new Date().getFullYear()
+
+        //fixed navBar and link to top
+        let nav = document.querySelector("#nav");
+        let homeLink = document.querySelector(".hideHomeLink")
+
+        window.addEventListener("scroll", () => {
+            let verticalHeight = window.pageYOffset;
+            let navHeight = nav.getBoundingClientRect().height;
+            if (verticalHeight > navHeight) {
+                nav.classList.add("fixedNavBar")
+            } else {
+                nav.classList.remove("fixedNavBar")
+            }
+
+            if (verticalHeight > 600) {
+                homeLink.classList.add("homeLink")
+            } else {
+                homeLink.classList.remove("homeLink")
+            }
+        })
+
+        //to fix the problem of scrolling beyond the link
+        let scroll = document.querySelectorAll(".scroll")
+        scroll.forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                let id = e.currentTarget.getAttribute("href")
+                let element = document.querySelector(id)
+
+                // the problem is because of fixed navbar, hence we have to subtract the fixed navbar height from the starting point co-ords of the link which we clicked
+                let navHeight = nav.getBoundingClientRect().height
+                let position = element.offsetTop - navHeight;
+
+                // here we have to subtract the above "position" result with navHeight again to fix the problem of over-scrolling from home to about section-
+                // as from home to about the navBar is not fixed
+                let fixedNav = nav.classList.contains("fixedNavBar")
+                if (!fixedNav) {
+                    position = position - navHeight;
+                }
+
+                //In small screens, the linkContainer height is also included in calculating the "position", Hence it overruns. to avoid this, we make small corrections
+                let linkContainerHeight = linkContainer.getBoundingClientRect().height;
+                if (navHeight > 60) {
+                    position = position + linkContainerHeight;
+                }
+                window.scrollTo(0, position)
+                // to close the navbar on smaller screen after the user has clicked the link- to improve user experience
+                linkContainer.style.height = 0;
+            })
+        });
+    </script>
+</body>
+
+</html>

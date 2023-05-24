@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Video">
+    <title>Video</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* visibility: visible;
+            z-index: 999; */
+        }
+
+        .hidePreloader {
+            display: none;
+            /* z-index: -999;
+            visibility: hidden; */
+        }
+
+        .hideMain {
+            display: none;
+        }
+
+        .mainContainer {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+
+        h1 {
+            color: yellow;
+            font-size: 40px;
+        }
+
+        .videoContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(30%);
+            z-index: -2;
+        }
+
+        #controlBtn {
+            background-color: rgb(8, 239, 239, 0.8);
+            color: black;
+            border: transparent;
+            border-radius: 5px;
+            width: 80px;
+            padding: 10px;
+            margin: 20px;
+        }
+
+        #controlBtn:hover {
+            background-color: rgb(8, 239, 239, 1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preloader">
+        <img src="./load.gif" alt="preloader">
+    </div>
+    <main class="hideMain">
+        <video loop muted class="videoContainer">
+            <source src="./ocean.mp4" type="video/mp4">
+        </video>
+        <h1>Over the Horizon</h1>
+        <p><button id="controlBtn">Play</button></p>
+    </main>
+    <script>
+        let controlBtn = document.querySelector("#controlBtn");
+        let video = document.querySelector(".videoContainer")
+        let preloader = document.querySelector(".preloader")
+        let main = document.querySelector("main")
+
+        controlBtn.addEventListener("click", () => {
+            if (video.paused) {
+                video.play();
+                controlBtn.textContent = "Pause"
+            } else {
+                video.pause();
+                controlBtn.textContent = "Play"
+            }
+        })
+
+        window.addEventListener("load", () => {
+            preloader.classList.add("hidePreloader");
+            main.classList.add("mainContainer")
+        })
+
+
+    </script>
+</body>
+
+</html>

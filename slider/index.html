@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Slider">
+    <title>Slider</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        .sliderContainer {
+            max-width: 80vw;
+            height: 70vh;
+            margin: 100px auto 50px auto;
+            border: 5px solid brown;
+            border-radius: 10px;
+            position: relative;
+        }
+
+
+        .slide-1 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("./images/image-1.jpg");
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            display: grid;
+            place-items: center;
+            font-size: 40px;
+            color: white;
+        }
+
+        .slide-2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: darkcyan;
+            text-align: center;
+            display: grid;
+            place-items: center;
+            font-size: 40px;
+            color: white;
+        }
+
+        .slide-3 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("./images/image-2.jpg");
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            display: grid;
+            place-items: center;
+            filter: brightness(50%);
+            z-index: -2;
+        }
+
+        .h1 {
+            color: black;
+            font-size: 100px;
+            text-align: center;
+        }
+
+        .slide-4 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display: grid;
+            place-items: center;
+
+        }
+
+        /* .imageContainer {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            margin: 0 auto;
+            margin-bottom: 15px;
+        }
+
+        #userImg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 100%;
+            box-shadow: 9px -5px rgba(6, 217, 200, 0.5);
+        } */
+
+        .btnContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        #preBtn,
+        #nextBtn {
+            padding: 10px;
+            margin-right: 10px;
+            width: 80px;
+            border: transparent;
+            background-color: rgb(169, 67, 44);
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        #preBtn:hover,
+        #nextBtn:hover {
+            background-color: rgb(9, 88, 235);
+
+        }
+    </style>
+</head>
+
+<body>
+    <section class="sliderContainer">
+        <div class="slide">
+        </div>
+        <!-- <div class="slide-2">
+            <h1>2</h1>
+        </div>
+        <div class="slide-3">
+            <h1>3</h1>
+        </div>
+        <div class="slide-4">
+            <div class="imageContainer">
+                <img src="./images/John.jpg" alt="" id="userImg">
+            </div>
+            <h4>susan doe</h4>
+            <h1>4</h1> -->
+        <!-- </div> -->
+    </section>
+    <div class="btnContainer">
+        <p><button id="preBtn">Pre</button></p>
+        <p></p><button id="nextBtn">Next</button></p>
+    </div>
+
+    <script>
+        let preBtn = document.querySelector("#preBtn")
+        let nextBtn = document.querySelector("#nextBtn")
+        let slide = document.querySelector(".slide")
+        let counter = 1;
+
+        slide.classList.add(`slide-${counter}`)
+        
+        nextBtn.addEventListener("click" ,(e)=>{
+            e.preventDefault();
+            counter++;
+            slide.classList.remove(`slide-${counter-1}`)
+            slide.classList.add(`slide-${counter}`)
+            // let h1 = document.createElement("h1")
+            // h1.textContent = counter;
+            // h1.classList.add("h1")
+        })
+
+        preBtn.addEventListener("click",(e)=>{
+            e.preventDefault();
+            counter--;
+            slide.classList.remove(`slide-${counter+1}`)
+            slide.classList.add(`slide-${counter}`)
+        })
+    </script>
+</body>
+
+</html>

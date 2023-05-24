@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tabs">
+    <title>Tabs</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        .heading {
+            text-align: center;
+            margin: 50px;
+        }
+
+        .heading p {
+            margin: 10px auto;
+            padding: 10px;
+        }
+
+        .mainContainer {
+            margin: 0 auto;
+            width: 80vw;
+            margin-bottom: 20px;
+        }
+
+        @media screen and (min-width:1000px) {
+            .mainContainer {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                column-gap: 30px;
+            }
+        }
+
+        .image {
+            margin-bottom: 2rem;
+        }
+
+        .image img {
+            width: 100%;
+            object-fit: cover;
+            height: 20rem;
+            border-radius: 5px;
+        }
+
+        .contentContainer {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            background-color: blanchedalmond;
+            border-radius: 5px;
+        }
+
+        .btnGroup {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 10px;
+            background-color: rgb(165, 42, 42);
+            color: white;
+            border: transparent;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn.active {
+            background-color: rgb(255, 255, 255);
+            color: black;
+        }
+
+        .btn:hover:not(.active) {
+            background-color: rgb(165, 42, 42, 0.6);
+        }
+
+        .result {
+            padding: 20px;
+            text-align: justify;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        p {
+            line-height: 2.5rem;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="heading">
+            <h1>About</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quis.</p>
+        </div>
+        <section class="mainContainer">
+            <article class="image">
+                <img src="./hero.jpeg" alt="" id="hero">
+            </article>
+            <article class="contentContainer">
+                <div class="btnGroup">
+                    <button class="btn" id="historyBtn" value="history">History</button>
+                    <button class="btn" id="visionBtn" value="vision">Vision</button>
+                    <button class="btn" id="goalsBtn" value="goals">Goals</button>
+                </div>
+                <div class="result">
+                    <div class="content" id="history">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem exercitationem, nulla
+                            temporibus, reprehenderit eaque corporis voluptate tempore alias minus magnam accusamus
+                            sapiente perspiciatis sint doloremque voluptatum iure distinctio perferendis dolores
+                            doloribus at assumenda ratione pariatur fugit consequatur! Fuga, architecto illo libero
+                            mollitia modi nostrum excepturi dolor ex impedit provident numquam.</p>
+                    </div>
+                    <div class="content" id="vision">
+                        <p> Molestiae repellat at ex perspiciatis provident nisi repellendus, sed ea quasi, voluptatibus
+                            veritatis omnis similique non accusamus vitae neque iure nesciunt necessitatibus
+                            consequuntur blanditiis?
+                            Minima harum illo tempore, odio impedit maxime consequatur accusantium, pariatur tenetur
+                            soluta officiis delectus quos mollitia atque illum, neque assumenda aut cupiditate
+                            aspernatur id modi voluptatem dolore provident nesciunt.</p>
+                    </div>
+                    <div class="content" id="goals">
+                        <p>Autem accusamus ullam aperiam, deserunt libero, minus doloremque nostrum quae corrupti illo
+                            blanditiis! Quam vero expedita magnam sint tenetur libero dolor voluptatibus officiis velit
+                            impedit! Officia harum, dolorum provident sit excepturi voluptatem eveniet veniam soluta
+                            iure voluptatum assumenda!</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        let historyBtn = document.querySelector("#historyBtn");
+        let visionBtn = document.querySelector("#visionBtn");
+        let goalsBtn = document.querySelector("#goalsBtn");
+        let history = document.querySelector("#history")
+        let vision = document.querySelector("#vision")
+        let goals = document.querySelector("#goals")
+
+        window.addEventListener("load", (e) => {
+            e.preventDefault();
+            history.classList.add("active")
+            historyBtn.classList.add("active")
+        })
+
+        function display(target, contentEle) {
+            let btns = document.querySelectorAll(".btn")
+            btns.forEach((btn) => {
+                btn.classList.remove("active")
+            })
+            let contents = document.querySelectorAll(".content")
+            contents.forEach((content) => {
+                content.classList.remove("active")
+            })
+            contentEle.classList.add("active")
+            target.classList.add("active")
+        }
+        historyBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            display(e.currentTarget, history);
+            // if (visionBtn.classList.contains("active")) {
+            //     visionBtn.classList.remove("active")
+            //     vision.classList.remove("active")
+            // } else {
+            //     goalsBtn.classList.remove("active")
+            //     goals.classList.remove("active")
+            // }
+            // history.classList.add("active")
+            // historyBtn.classList.add("active")
+        })
+
+        visionBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            display(e.currentTarget, vision);
+            // if (historyBtn.classList.contains("active")) {
+            //     historyBtn.classList.remove("active")
+            //     history.classList.remove("active")
+            // } else {
+            //     goalsBtn.classList.remove("active")
+            //     goals.classList.remove("active")
+            // }
+            // vision.classList.add("active")
+            // visionBtn.classList.add("active")
+        })
+
+        goalsBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            display(e.currentTarget, goals);
+            // if (visionBtn.classList.contains("active")) {
+            //     visionBtn.classList.remove("active")
+            //     vision.classList.remove("active")
+            // } else {
+            //     historyBtn.classList.remove("active")
+            //     history.classList.remove("active")
+            // }
+            // goals.classList.add("active")
+            // goalsBtn.classList.add("active")
+        })
+    </script>
+</body>
+
+</html>
