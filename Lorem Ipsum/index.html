@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lorem Ipsum Generator">
+    <title>Placeholder Text Generator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        section {
+            min-height: 200px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        section h1 {
+            padding: 30px;
+            font-size: 40px;
+        }
+
+        section p {
+            padding-bottom: 30px;
+        }
+
+        input {
+            width: 50px;
+        }
+
+        #btn {
+            background: rgb(0, 0, 128, 0.6);
+            border: transparent;
+            color: white;
+            border-radius: 3px;
+            width: 70px;
+            padding: 5px;
+            margin-left: 15px;
+        }
+
+        #btn:hover {
+            background: rgb(0, 0, 128, 1);
+
+        }
+
+        #randomText {
+            /* display: flex;
+            flex-direction: column; */
+            max-width: 800px;
+            min-height: 50vh;
+            margin: 0 auto;
+        }
+
+        .result {
+            padding: 20px;
+            margin-bottom: 1rem;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h1>Placeholder Text Generator</h1>
+        <p>Tired of Lorem Ipsum? Then try this.</p>
+        <form action="#" id="form">
+            <label for="number">Paragraphs:</label>
+            <input type="number" name="number" id="number" title="Enter between 1 and 10">
+            <button type="submit" id="btn">Generate</button>
+        </form>
+    </section>
+    <article id="randomText">
+
+    </article>
+    <script>
+
+        let placeholderArr = [
+            "I'm baby ramps PBR & B quinoa kombucha drinking vinegar.Seitan enamel pin narwhal big mood mixtape before they sold out.Gorpcore retro selvage glossier sartorial vape.Trust fund tbh mumblecore narwhal bruh gentrify, master cleanse chia vinyl hot chicken normcore offal actually keffiyeh woke.",
+            "Farm-to-table quinoa bushwick photo booth solarpunk. Literally seitan disrupt ugh swag franzen. Tofu kogi tacos tote bag, everyday carry intelligentsia migas biodiesel snackwave pickled kickstarter. Messenger bag shoreditch keffiyeh paleo scenester. Vinyl edison bulb portland bodega boys single-origin coffee wolf. Microdosing typewriter lo-fi gochujang, locavore bushwick 90's health goth tattooed pok pok food truck pour-over godard pop-up shabby chic.",
+            "Retro tilde distillery XOXO PBR&B. Messenger bag dreamcatcher bruh heirloom kogi tumblr vegan fit microdosing. Butcher tumblr street art neutra. Raw denim hella fit, kickstarter crucifix mlkshk echo park activated charcoal distillery. Leggings banjo celiac marxism tousled irony kombucha bushwick, enamel pin selfies raclette single-origin coffee la croix ennui.",
+            "Irony messenger bag meggings glossier, thundercats blue bottle hashtag jawn williamsburg microdosing street art. Yes plz polaroid echo park blog snackwave. Chicharrones 8-bit twee typewriter banh mi sriracha irony polaroid austin subway tile lumbersexual yes plz stumptown. Tilde chia cronut enamel pin gorpcore succulents. Roof party cardigan godard cornhole mixtape.",
+            "JOMO poutine VHS, heirloom mumblecore kale chips hoodie normcore. Master cleanse bruh synth swag, food truck hot chicken schlitz gorpcore bitters tumeric marfa single-origin coffee. Forage kickstarter listicle marfa, tumblr butcher pork belly. Truffaut brunch taiyaki locavore. Same raw denim bespoke, pickled vegan before they sold out post-ironic kickstarter. Bodega boys gatekeep crucifix, whatever pinterest master cleanse tbh fixie lumbersexual austin butcher church-key forage.",
+            "Readymade bruh meggings trust fund ascot. Yuccie heirloom chia, polaroid health goth before they sold out celiac Brooklyn tonx tumblr synth master cleanse. Gastropub selvage meggings cloud bread street art. Thundercats cornhole kinfolk seitan master cleanse heirloom.",
+            "Craft beer air plant pickled literally street art selfies jawn kitsch affogato succulents, cloud bread bodega boys. Post-ironic retro sriracha edison bulb vibecession, literally occupy blackbird spyplane disrupt tousled kickstarter health goth tattooed. Crucifix cred affogato blackbird spyplane PBR&B, gastropub ramps messenger bag freegan vape woke marxism you probably haven't heard of them mixtape vaporware. Keytar ennui drinking vinegar shaman venmo. Fixie microdosing poke, etsy letterpress ramps VHS helvetica meh iPhone solarpunk taiyaki.",
+            "Post-ironic freegan sustainable grailed VHS, jianbing whatever big mood cardigan bruh blue bottle wolf meditation paleo pug. Swag keffiyeh knausgaard food truck crucifix DSA, vexillologist listicle. 8-bit austin tonx jean shorts praxis. Meggings raw denim keffiyeh organic farm-to-table tofu gatekeep adaptogen stumptown hell of squid.",
+            "Yuccie affogato activated charcoal ennui. Hammock keffiyeh banh mi glossier neutral milk hotel selfies yuccie hexagon food truck venmo typewriter kickstarter mlkshk brunch",
+            "Whatever single-origin coffee retro distillery meditation JOMO cold-pressed. Chambray keytar mumblecore keffiyeh tumeric lyft. La croix pork belly wayfarers yes plz listicle thundercats. Hoodie +1 organic neutra enamel pin tofu neutral milk hotel kogi.",
+
+
+        ]
+        let number = document.querySelector("#number")
+        let btn = document.querySelector("#btn")
+        let randomText = document.querySelector("#randomText")
+
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            let val = parseInt(number.value);
+            let index = Math.floor(Math.random() * placeholderArr.length)
+            if (isNaN(val) || val <= 0 || val > 10) {
+                randomText.innerHTML = `<p class="result">${placeholderText[index]}</p>`
+            } else {
+                let tempArr = placeholderArr.slice(0, val);
+                let result = tempArr.map((item) => {
+                    return `<p class="result">${item}</p>`;
+                }).join("");
+                randomText.innerHTML = result;
+            }
+        })
+    </script>
+</body>
+
+</html>

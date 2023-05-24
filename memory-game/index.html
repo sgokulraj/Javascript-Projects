@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="memory-game">
+    <title>Memory Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        h1 {
+            margin: 20px;
+            text-align: center;
+            font-size: 32px;
+        }
+
+        .gameGrid,
+        .blank {
+            width: 300px;
+            height: 400px;
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
+            place-items: center;
+            margin: 0 auto;
+        }
+
+        .disable {
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h1>Memory Game</h1>
+        <div class="gameGrid">
+        </div>
+        <div class="blank"></div>
+    </section>
+    <script>
+        let fruits = [
+            {
+                name: "Pomegranate",
+                image: "./images/Pomegranate.jpg"
+            },
+            {
+                name: "Watermelon",
+                image: "./images/Watermelon.jpg"
+            },
+            {
+                name: "Dragonfruit",
+                image: "./images/Dragonfruit.jpg"
+            },
+            {
+                name: "Lemon",
+                image: "./images/Lemon.jpg"
+            },
+            {
+                name: "Mango",
+                image: "./images/Mango.jpg"
+            },
+            {
+                name: "Papaya",
+                image: "./images/Papaya.jpg"
+            },
+            {
+                name: "Pomegranate",
+                image: "./images/Pomegranate.jpg"
+            },
+            {
+                name: "Watermelon",
+                image: "./images/Watermelon.jpg"
+            },
+            {
+                name: "Dragonfruit",
+                image: "./images/Dragonfruit.jpg"
+            },
+            {
+                name: "Lemon",
+                image: "./images/Lemon.jpg"
+            },
+            {
+                name: "Mango",
+                image: "./images/Mango.jpg"
+            },
+            {
+                name: "Papaya",
+                image: "./images/Papaya.jpg"
+            }
+        ]
+
+        let gameGrid = document.querySelector(".gameGrid")
+        let blankGrid = document.querySelector(".blank")
+
+        window.addEventListener("load", function randomsort() {
+            for (let i = fruits.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1))
+                let k = fruits[i];
+                fruits[i] = fruits[j]
+                fruits[j] = k
+            }
+            console.log(fruits[0].image);
+            for (let i = 0; i < fruits.length; i++) {
+                let div = document.createElement("div")
+                div.id = i;
+                gameGrid.append(div)
+                let cards = document.createElement("img");
+                cards.src = fruits[i].image;
+                cards.setAttribute("id", i)
+                div.append(cards)
+            }
+        })
+
+
+        setTimeout(blank, 1000)
+
+        let cardId = [];
+        let cardName = [];
+        let cardMatched = [];
+
+        function blank() {
+            gameGrid.style.display = "none";
+            for (let i = 0; i < fruits.length; i++) {
+                let div = document.createElement("div")
+                div.id = i;
+                blankGrid.append(div)
+                let cards = document.createElement("img")
+                cards.src = "./images/blank.jpg";
+                cards.setAttribute("id", i)
+                div.append(cards)
+            }
+            let cards = document.querySelectorAll("img")
+
+            cards.forEach((card) => {
+                card.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    let id = e.currentTarget.id
+                    if (!(cardId.includes(id))) {
+                        cardId.push(id)
+                        cardName.push(fruits[id].name)
+                        card.setAttribute("src", fruits[id].image)
+                    }
+                    if (cardId.length === 2) {
+                        setTimeout(match, 1000)
+                    }
+                })
+            })
+        }
+
+        function match() {
+            let cards = document.querySelectorAll(".blank div")
+            let [firstItem, secondItem] = cardId
+
+            if (cardName[0] === cardName[1]) {
+                // alert("correct");
+                cards[firstItem].firstElementChild.setAttribute("src", "./images/correct.png")
+                cards[secondItem].firstElementChild.setAttribute("src", "./images/correct.png")
+                cards[firstItem].firstElementChild.classList.add("disable")
+                cards[secondItem].firstElementChild.classList.add("disable")
+                cardMatched.push(cardName[0])
+                cardMatched.push(cardName[1])
+                if(cardMatched.length == fruits.length){
+                    alert("You Won!!!")
+                }
+            } else {
+                alert("incorrect");
+                cards[firstItem].firstElementChild.setAttribute("src", "./images/blank.jpg")
+                cards[secondItem].firstElementChild.setAttribute("src", "./images/blank.jpg")
+            }
+            cardId.splice(0, 2)
+            cardName.splice(0, 2)
+        }
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="menu">
+    <title>Menu</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        .titlecontainer {
+            margin: 50px 20px;
+        }
+
+        .underline {
+            height: 5px;
+            width: 80px;
+            border-radius: 25px;
+            background-color: darkcyan;
+            margin-top: 2px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .heading {
+            text-align: center;
+            letter-spacing: 5px;
+            font-weight: bolder;
+            font-size: 40px;
+        }
+
+        .menuContainer {
+            height: auto;
+            width: 90vw;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px 80px;
+        }
+
+        @media screen and (max-width:1200px) {
+            .menuContainer {
+                width: 70vw;
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btnContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: darkblue;
+            color: white;
+            border: none;
+            font-size: 16px;
+            padding: 5px;
+            border-radius: 5px;
+            margin: 20px 10px;
+
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 0.75fr 2fr;
+            column-gap: 40px;
+        }
+
+        @media screen and (max-width:750px) {
+            .item {
+                display: grid;
+                grid-template-columns: 1fr;
+                row-gap: 20px;
+            }
+
+            .menuContainer {
+                width: 50vw;
+                row-gap: 60px;
+            }
+        }
+
+        img {
+            display: block;
+            height: 150px;
+            width: 100%;
+            object-fit: cover;
+            border: 4px solid goldenrod;
+            border-radius: 5px;
+        }
+
+        .itemDesc {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            padding-top: 0;
+            font-size: 20px;
+            line-height: 1.5rem;
+        }
+
+        .itemHeading {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid gray;
+        }
+
+        .itemHeading h4 {
+            letter-spacing: 4px;
+        }
+
+        .description {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="titlecontainer">
+        <h1 class="heading">Our Menu</h1>
+        <div class="underline"></div>
+    </div>
+    <div class="btnContainer">
+        <button type="button" class="btn" id="all">All</button>
+        <button type="button" class="btn" id="breakfast">Breakfast</button>
+        <button type="button" class="btn" id="lunch">Lunch</button>
+        <button type="button" class="btn" id="shakes">Shakes</button>
+        <button type="button" class="btn" id="dinner">Dinner</button>
+    </div>
+    <div class="menuContainer">
+
+        <!-- example -->
+
+        <!-- <div class="item">
+            <img src="./images/item-1.jpeg" alt="">
+            <div class="itemDesc">
+                <div class="itemHeading">
+                    <h4>Buttermilk Pancakes</h4>
+                    <p><strong>₹16</strong></p>
+                </div>
+                <div class="description">
+                    <p>I'm baby woke mlkshk wolf bitters live-edge blue bottle, hammock freegan copper mug whatever
+                        cold-pressed</p>
+                </div>
+            </div>
+        </div> -->
+
+    </div>
+    <script>
+        const menus = [
+            {
+                id: 1,
+                title: "Buttermilk Pancakes",
+                category: "breakfast",
+                price: 15.99,
+                img: "./images/item-1.jpeg",
+                desc: `I'm baby woke mlkshk wolf bitters live-edge blue bottle, hammock freegan copper mug whatever cold-pressed `,
+            },
+            {
+                id: 2,
+                title: "Diner Double",
+                category: "lunch",
+                price: 13.99,
+                img: "./images/item-2.jpeg",
+                desc: `Vaporware iPhone mumblecore selvage raw denim slow-carb leggings gochujang helvetica man braid jianbing. Marfa thundercats `,
+            },
+            {
+                id: 3,
+                title: "Godzilla Milkshake",
+                category: "shakes",
+                price: 6.99,
+                img: "./images/item-3.jpeg",
+                desc: `Ombucha chillwave fanny pack 3 wolf moon street art photo booth before they sold out organic viral.`,
+            },
+            {
+                id: 4,
+                title: "Country Delight",
+                category: "breakfast",
+                price: 20.99,
+                img: "./images/item-4.jpeg",
+                desc: `Shabby chic keffiyeh neutra snackwave pork belly shoreditch. Prism austin mlkshk truffaut, `,
+            },
+            {
+                id: 5,
+                title: "Egg Attack",
+                category: "lunch",
+                price: 22.99,
+                img: "./images/item-5.jpeg",
+                desc: `Franzen vegan pabst bicycle rights kickstarter pinterest meditation farm-to-table 90's pop-up `,
+            },
+            {
+                id: 6,
+                title: "Oreo Dream",
+                category: "shakes",
+                price: 18.99,
+                img: "./images/item-6.jpeg",
+                desc: `Portland chicharrones ethical edison bulb, palo santo craft beer chia heirloom iPhone everyday`,
+            },
+            {
+                id: 7,
+                title: "Bacon Overflow",
+                category: "breakfast",
+                price: 8.99,
+                img: "./images/item-7.jpeg",
+                desc: `Carry jianbing normcore freegan. Viral single-origin coffee live-edge, pork belly cloud bread iceland put a bird `,
+            },
+            {
+                id: 8,
+                title: "American Classic",
+                category: "lunch",
+                price: 12.99,
+                img: "./images/item-8.jpeg",
+                desc: `On it tumblr kickstarter thundercats migas everyday carry squid palo santo leggings. Food truck truffaut  `,
+            },
+            {
+                id: 9,
+                title: "Quarantine Buddy",
+                category: "shakes",
+                price: 16.99,
+                img: "./images/item-9.jpeg",
+                desc: `Skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+            },
+            {
+                id: 10,
+                title: "Bison Steak",
+                category: "dinner",
+                price: 22.99,
+                img: "./images/item-10.jpeg",
+                desc: `Skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+            }
+        ];
+
+        let menuContainer = document.querySelector(".menuContainer");
+        let btns = document.querySelectorAll(".btn");
+
+        function resultant() {
+            let result = menus.map((menu) => {
+                return (
+                    `<div class="item">
+                        <img src="${menu.img}" alt="${menu.id}">
+                        <div class="itemDesc">
+                            <div class="itemHeading">
+                                <h4>${menu.title}</h4>
+                                <p><strong>${menu.price}</strong></p>
+                            </div>
+                            <div class="description">
+                                <p>${menu.desc}</p>
+                            </div>
+                        </div>
+                    </div>`
+                )
+            })
+            menuContainer.innerHTML = result.join(" ");
+        }
+
+        window.addEventListener("load", resultant())
+
+
+        btns.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                if (e.currentTarget.id != "all") {
+                    let filtered = menus.filter(function (menu) {
+                        return menu.category == e.currentTarget.id
+                    })
+                    let result = filtered.map((element) => {
+                        return (
+                            `<div class="item">
+                                <img src="${element.img}" alt="${element.id}">
+                                <div class="itemDesc">
+                                    <div class="itemHeading">
+                                        <h4>${element.title}</h4>
+                                        <p><strong>${element.price}</strong></p>
+                                    </div>
+                                    <div class="description">
+                                        <p>${element.desc}</p>
+                                    </div>
+                                </div>
+                            </div>`
+                        )
+                    })
+                    menuContainer.innerHTML = result.join(" ");
+                } else {
+                    resultant()
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
