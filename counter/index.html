@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="counter-app">
+    <title>Counter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+            background-color: aliceblue;
+
+        }
+
+        #main {
+            height: 250px;
+            margin: 250px auto;
+            text-align: center;
+        }
+
+        .numColorPositive {
+            color: green;
+        }
+
+        .numColorNegative {
+            color: red;
+        }
+
+        #btnGroup {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <h1>Counter</h1>
+        <h2 id="num" class="fs-1"></h2>
+        <div class="mt-4">
+            <button id="decrease" class="btn btn-outline-secondary">Decrease</button>
+            <button id="reset" class="btn btn-outline-secondary">Reset</button>
+            <button id="increase" class="btn btn-outline-secondary">Increase</button>
+        </div>
+    </div>
+    <script>
+        let num = document.querySelector("#num");
+        let increase = document.querySelector("#increase");
+        let decrease = document.querySelector("#decrease");
+        let reset = document.querySelector("#reset");
+        let number = 0;
+        num.textContent = number;
+        increase.addEventListener("click", (e) => {
+            e.preventDefault();
+            number = number + 1;
+            num.textContent = number;
+            colorClass();
+        });
+
+        decrease.addEventListener("click", (e) => {
+            e.preventDefault();
+            number = number - 1;
+            num.textContent = number;
+            colorClass();
+
+        });
+
+        reset.addEventListener("click", (e) => {
+            e.preventDefault();
+            number = 0;
+            num.textContent = number;
+            colorClass();
+        });
+
+        function colorClass() {
+            if (number > 0) {
+                num.classList.remove("numColorNegative")
+                num.classList.add("numColorPositive")
+            } else if (number < 0) {
+                num.classList.remove("numColorPositive")
+                num.classList.add("numColorNegative")
+            } else {
+                num.classList.remove("numColorNegative")
+                num.classList.remove("numColorPositive")
+            }
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

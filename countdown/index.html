@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="countdown">
+    <title>Countdown</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        section {
+            width: 85vw;
+            margin: 100px auto;
+        }
+
+        .image {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        img {
+            width: 90%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        @media screen and (min-width:900px) {
+            img {
+                width: 100%;
+                height: 400px;
+            }
+
+            section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                column-gap: 30px;
+            }
+
+            .countdownTimer {
+                margin-left: 20px;
+            }
+        }
+
+        .info {
+            margin-bottom: 1rem;
+        }
+
+        .title {
+            margin: 0 auto;
+            padding: 25px;
+        }
+
+        .title h2 {
+            font-size: 25px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .deadline {
+            margin-bottom: 2rem;
+            font-size: 20px;
+            color: darkred;
+            letter-spacing: 1.5px;
+            font-weight: bolder;
+        }
+
+        .countdownTimer {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .deadlineCounter {
+            background-color: darkblue;
+            color: white;
+            padding: 5px;
+            margin: 10px;
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            display: grid;
+            place-items: center;
+        }
+
+        .expiry {
+            margin: 2rem;
+            font-size: 20px;
+            color: darkred;
+            letter-spacing: 1.5px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <article class="image">
+            <img src="./image.jpg" alt="">
+        </article>
+        <article class="info">
+            <div class="title">
+                <h2>iPhone Alert!!!</h2>
+                <p class="deadline"></p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora ipsum itaque quisquam hic iure
+                    minus vitae, magnam qui doloremque deleniti maiores quo quaerat magni deserunt recusandae. Ipsum
+                    natus cum, nisi ullam aperiam, a sunt optio in quam eos quod quos.</p>
+            </div>
+
+            <div class="countdownTimer">
+                <div class="deadlineCounter">
+                    <h2>34</h2>
+                    <span>Days</span>
+                </div>
+                <div class="deadlineCounter">
+                    <h2>34</h2>
+                    <span>Hours</span>
+                </div>
+                <div class="deadlineCounter">
+                    <h2>34</h2>
+                    <span>Mins</span>
+                </div>
+                <div class="deadlineCounter">
+                    <h2>34</h2>
+                    <span>Secs</span>
+                </div>
+            </div>
+        </article>
+    </section>
+    <script>
+        const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ];
+        const weekdays = [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+        ];
+
+        let deadline = document.querySelector(".deadline")
+        let newdate = new Date();
+        let tempYear = newdate.getFullYear();
+        let tempMonth = newdate.getMonth();
+        let tempDate = newdate.getDate();
+
+        // let deadlineDate = new Date(2023, 4, 24, 12, 24, 0)
+
+        let deadlineDate = new Date(tempYear, tempMonth, tempDate + 10, 15, 30)
+        const year = deadlineDate.getFullYear();
+        const month = months[deadlineDate.getMonth()];
+        const date = deadlineDate.getDate();
+        const day = weekdays[deadlineDate.getDay()]
+        let hour;
+        let meridian;
+        if (deadlineDate.getHours() > 12) {
+            hour = deadlineDate.getHours() - 12
+            meridian = 'PM'
+        } else {
+            hour = deadlineDate.getHours()
+            meridian = "AM"
+        }
+        const mins = deadlineDate.getMinutes()
+
+        deadline.textContent = `Giveaway ends on ${day}, ${date}-${month}-${year}, ${hour}:${mins} ${meridian}`
+
+
+        //Time Counter
+        let timeCounter = document.querySelectorAll(".deadlineCounter h2")
+        function calculateDifference() {
+            const deadlineMS = deadlineDate.getTime();  // deadline date in ms
+            let now = Date.now(); //current date in ms
+            let difference = deadlineMS - now;
+
+            // day, month,hour, minutes in ms
+            const oneSec = 1000
+            const oneMinute = 60 * 1000;
+            const oneHour = oneMinute * 60;
+            const oneDay = oneHour * 24;
+
+            let days = Math.floor(difference / oneDay)
+            let hours = Math.floor((difference % oneDay) / oneHour);
+            let minutes = Math.floor((difference % oneHour) / oneMinute)
+            let seconds = Math.floor((difference % oneMinute) / oneSec)
+
+            let dateDifference = [days, hours, minutes, seconds]
+            let formated = dateDifference.map((ele) => {
+                if (ele < 10) {
+                    ele = `0${ele}`
+                }
+                return ele
+            })
+            timeCounter.forEach((element, index) => {
+                element.innerHTML = formated[index];
+            })
+
+            //if deadline occurs
+            let countdownTimer = document.querySelector(".countdownTimer")
+            if (difference < 0) {
+                clearInterval(countdown);
+                countdownTimer.innerHTML = `<p class="expiry">DeadLine Expired!!!</p>`
+            }
+        }
+
+        let countdown = setInterval(calculateDifference, 1000) //to call the function automatically after 1 second.. this is to update the time difference on run time
+    </script>
+</body>
+
+</html>
