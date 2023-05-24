@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="carousel">
+    <title>Carousel</title>
+    <script src="https://kit.fontawesome.com/a28d96221b.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        .mainContainer {
+            margin-top: 125px;
+        }
+
+        .underline {
+            height: 5px;
+            width: 80px;
+            border-radius: 25px;
+            background-color: darkcyan;
+            margin-top: 2px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .heading {
+            text-align: center;
+            letter-spacing: 5px;
+            font-weight: bolder;
+            font-size: 40px;
+        }
+
+        .reviewContainer {
+            max-width: 600px;
+            min-height: 450px;
+            overflow: auto;
+            background-color: white;
+            margin-bottom: 50px;
+            margin-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 25px;
+            text-align: center;
+            padding: 30px;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .reviewContainer:hover {
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .imageContainer {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            margin: 0 auto;
+            margin-bottom: 15px;
+        }
+
+        #userImg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 100%;
+            box-shadow: 9px -5px rgba(6, 217, 200, 0.5);
+        }
+
+        .imageContainer::after {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            content: "\f10e";
+            position: absolute;
+            top: 0;
+            left: 130px;
+            border-radius: 50%;
+            background: cadetblue;
+            transform: rotateY(180deg);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            display: grid;
+            place-items: center;
+        }
+
+        #userName {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        #job {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        #review {
+            text-align: center;
+            line-height: 1.5rem;
+            margin-bottom: 13px;
+        }
+
+        .randomBtn {
+            font-size: 15px;
+            margin-top: 20px;
+            color: rgba(6, 217, 200, 1);
+            background-color: rgba(6, 217, 200, 0.1);
+            border: 1px solid rgba(6, 217, 200, 1);
+            padding: 3px;
+            border-radius: 5px;
+        }
+
+        .randomBtn:hover {
+            background-color: rgba(6, 217, 200, 0.8);
+            color: black;
+        }
+
+        .preBtn,
+        .nextBtn {
+            color: rgba(6, 217, 200, 0.5);
+            border: transparent;
+            background-color: transparent;
+            width: 25px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .preBtn:hover,
+        .nextBtn:hover {
+            color: rgba(6, 217, 200, 1);
+        }
+        @media screen and (max-width:700px) {
+            .reviewContainer{
+                width: 80vw;
+            }
+            
+        }
+    </style>
+</head>
+
+<body>
+    <section class="mainContainer">
+        <div>
+            <h1 class="heading">Our Reviews</h1>
+            <div class="underline"></div>
+        </div>
+        <div class="reviewContainer">
+            <div class="imageContainer">
+                <img src="" alt="" id="userImg">
+            </div>
+            <div class="userReview">
+                <h4 id="userName"></h4>
+                <p id="job"></p>
+                <p id="review"></p>
+            </div>
+            <div id="btnGroup">
+                <button class="preBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button><br />
+                <button class="randomBtn">Random</button>
+            </div>
+        </div>
+
+    </section>
+    <script>
+        let userReview = [
+            {
+                name: "Sara",
+                job: "Test Engineer",
+                image: "./image/Sara.jpeg",
+                review: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt quos accusantium aspernatur at, suscipit minima mollitia libero quo qui nemo numquam, animi culpa totam. Aperiam quitium quam quia sed omnis, quod ipsa facilis earum nam odit impedit eum vel blanditiis quisquam! Fugit, fuga quasi suscipit expedita et ipsa quidem"
+            },
+            {
+                name: "John",
+                job: "Web Designer",
+                image: "./image/John.jpg",
+                review: "Quisque efficitur purus id interdum sollicitudin. Vivamus sit amet nunc sed arcu auctor malesuada. Suspendisse quis lorem est. Morbi aliquet sagittis iaculis. Morbi auctor libero eu blandit facilisis. Donec eu bibendum ante. Sed sed consequat arcu. Sed accumsan et magna sit amet vehicula."
+            },
+            {
+                name: "Jack",
+                job: "Web Developer",
+                image: "./image/Jack.jpg",
+                review: "Aliquam eget placerat nunc. Aenean in nibh in dui facilisis elementum. In non ante eu eros gravida pharetra. Suspendisse sit amet justo eu tortor tempus auctor at vel dui. Quisque auctor semper ipsum rhoncus consectetur."
+            },
+            {
+                name: "Mary",
+                job: "Python Developer",
+                image: "./image/Mary.jpg",
+                review: "Etiam justo turpis, imperdiet consectetur egestas vitae, aliquet non leo. Phasellus malesuada volutpat libero convallis lobortis. Donec eget facilisis sem. Nullam tortor diam, interdum non viverra varius, fringilla eget leo. Sed elit ligula, dapibus ac eros non, consectetur tincidunt augue. Ut enim arcu, euismod at egestas id, imperdiet quis eros. Suspendisse odio mi, dignissim eget gravida non, dignissim eget eros. Mauris nec risus in est suscipit ultrices."
+            }
+        ]
+
+        let userName = document.querySelector("#userName")
+        let job = document.querySelector("#job")
+        let review = document.querySelector("#review")
+        let userImg = document.querySelector("#userImg")
+
+        let preBtn = document.querySelector(".preBtn")
+        let nextBtn = document.querySelector(".nextBtn");
+        let randomBtn = document.querySelector(".randomBtn")
+        let index = 0;
+
+        function reviews() {
+            userName.textContent = userReview[index].name;
+            job.textContent = userReview[index].job;
+            review.textContent = userReview[index].review;
+            userImg.src = userReview[index].image;
+        }
+
+        window.addEventListener("DOMContentLoaded", (e) => {
+            e.preventDefault();
+            reviews()
+        })
+
+        nextBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            index++;
+            if (index >= userReview.length) {
+                index = 0;
+            }
+            reviews();
+        })
+
+        preBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            index--;
+            if (index < 0) {
+                index = userReview.length - 1
+            }
+            reviews();
+        })
+
+        randomBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            index = Math.floor(Math.random() * userReview.length);
+            reviews();
+        })
+    </script>
+
+</body>
+
+</html>
